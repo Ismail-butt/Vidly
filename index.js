@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 
 const genreRoutes = require('./routes/genreRoutes')
+const customerRoutes = require('./routes/customerRoutes')
 
 const app = express()
 
@@ -12,6 +13,7 @@ mongoose.connect('mongodb://localhost/vidly')
 app.use(express.json())
 
 app.use('/api/genres', genreRoutes)
+app.use('/api/customers', customerRoutes)
 
 app.get('/', (req, res) => {
     res.send('App is running...')
