@@ -1,28 +1,8 @@
-const mongoose = require('mongoose')
-const Joi = require('joi')
+const {Customer, validate} = require('../models/cutomerModel')
 const express = require('express')
 const router = express.Router()
 
-const customerSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 50
-    },
-    phone: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 50
-    },
-    isGold: {
-        type: Boolean,
-        default: false
-    }
-})
 
-const Customer = new mongoose.model('Customer', customerSchema)
 
 router.get('/', async (req, res) => {
     const customers = await Customer.find({}).sort('name')
@@ -43,7 +23,7 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const {error} = validCustomer(req.body)
+    const {error} = validate(req.body)
 
     if(error) {
         // 400 - Bad Request
@@ -62,7 +42,7 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
-    const {error} = validCustomer(req.body)
+    const {error} = validate(req.body)
     if(error) {
         // 400 - Bad Request
         return res.status(400).send(error.details[0].message)
@@ -94,18 +74,6 @@ router.delete('/:id', async (req, res) => {
 
     res.send(customer) // return the genre, which is deleted
 })
-
-
-// check if the genre is valid according to the schema or not
-const validCustomer = (customer) => {
-    const schema = {
-        name: Joi.string().min(5).max(50).required(),
-        phone: Joi.string().min(5).max(50).required(),
-        isGold: Joi.boolean()
-    }
-
-    return Joi.validate(customer, schema)
-}
 
 // Export all the routes
 module.exports = router
