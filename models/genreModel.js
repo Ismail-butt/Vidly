@@ -23,4 +23,5 @@ const validGenre = (genre) => {
 
 // Exports Here
 module.exports.Genre = Genre
+module.exports.genreSchema = genreSchema
 module.exports.validate = validGenre

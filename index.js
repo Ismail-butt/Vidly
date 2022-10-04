@@ -3,6 +3,7 @@ const express = require('express')
 
 const genreRoutes = require('./routes/genreRoutes')
 const customerRoutes = require('./routes/customerRoutes')
+const movieRoutes = require('./routes/movieRoutes')
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(express.json())
 
 app.use('/api/genres', genreRoutes)
 app.use('/api/customers', customerRoutes)
+app.use('/api/movies', movieRoutes)
 
 app.get('/', (req, res) => {
     res.send('App is running...')
