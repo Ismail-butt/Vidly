@@ -27,9 +27,17 @@ const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Listening at Port ${port}...`))
 
 
+// ------------------ Notes -------------------
+
 // - Transaction
 // it is possible that one async operation doesn't Complete like rental or MongoDb Connection Drops. then the second Async Operation will not be complete
 // That's where we need TRANSACTION operation. Transaction makes sure that both Async Operation Completes (means both will update the state or none of this will apply) or Both not. So, They are Atomic. They both completes or both roll back.
 // It is not present in Non-Relation database, Only in Relational Database.
 // They are technique that is Two phase Commits through which we can implement Transaction but it is - Advanced Topic
 // NPM Package that will simulate Transaction in Mongoose.
+
+// Transaction
+// A group of operations that should be performed as a unit. So, either all these operation will complete and change the state of the database or if any of the operation fails, we will roll back and database will go back to initial state.
+// In MongoDb, we don't have Transaction.
+// There is a technique that is Two phase Commits through which we can implement Transaction but it is - Advanced Topic
+// NPM Package Fawn that will simulate Transaction in Mongoose.

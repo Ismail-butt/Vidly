@@ -44,6 +44,30 @@ router.post('/', async (req, res) => {
     }
   });
 
+  // Transaction Starts Here
+
+//   try {
+//     new Fawn.Task()
+//         .save('rentals', rental) // Chain All the task here
+//         .update('movies', { _id: movie._id}, {
+//             $inc: { numberInStock: -1 }
+//         })
+//         .run() // run will run All the task.
+//         .catch(function(err){
+//             // Everything has been rolled back.
+            
+//             // log the error which caused the failure
+//             console.log(err);
+//         });
+
+//         console.log("Rental: ", rental)
+
+//         res.send(rental);
+//   } catch (err) {
+//     // 500 - Internal Server Error
+//     res.status(500).send('Something failed.')
+//   }
+
   rental = await rental.save();
 
   movie.numberInStock--;
