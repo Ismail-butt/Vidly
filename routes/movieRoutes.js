@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
     }
     
     // Valid
-    let newMovie = new Movie({
+    const newMovie = new Movie({
         title: req.body.title,
         genre: { // Note - we are doing this bcz what if genre has 50 properties, we don't want to add 50. we just want to add the properties which we want. Also, _v is also present in a document, we also don't want to add it. That's why we choose this method man.
             _id: genre._id,
@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
         dailyRentalRate: req.body.dailyRentalRate,
     })
 
-    newMovie = await newMovie.save()
+    await newMovie.save() // - We don't need to get Movie Object from .save() method bcz Id is genrated by Mongod(Mongo Driver), not mongodb. So, we can change let newMovie to const newMovie xd.
     res.send(newMovie)
 })
 

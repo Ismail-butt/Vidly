@@ -1,3 +1,5 @@
+const Joi = require('joi')
+Joi.objectId = require('joi-objectid')(Joi)
 const mongoose = require('mongoose')
 const express = require('express')
 
@@ -41,3 +43,23 @@ app.listen(port, () => console.log(`Listening at Port ${port}...`))
 // In MongoDb, we don't have Transaction.
 // There is a technique that is Two phase Commits through which we can implement Transaction but it is - Advanced Topic
 // NPM Package Fawn that will simulate Transaction in Mongoose.
+
+// Information about MongoDB id
+
+// - We don't need to get Movie Object from .save() method bcz Id is genrated by Mongod(Mongo Driver), not mongodb. So, we can change let newMovie to const newMovie xd.
+
+// _id in MongoDB Document 
+
+// _id: 633c49042f9cfe9beac787ff
+
+// 12 bytes, 2chars = 1 byte
+    // 4 bytes: timestamp
+    // 3 bytes: machine indentifier
+    // 2 bytes: process identifier
+    // 3 bytes: counter
+
+// 1 byte 8 bits
+// 2 ^ 8 = 256
+// 2 ^ 24  = 16M
+
+// Driver -> MongoDB

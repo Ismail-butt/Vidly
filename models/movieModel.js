@@ -36,7 +36,7 @@ const Movie = new mongoose.model('Movie', movieSchema)
 const validMovie = (movie) => {
     const schema = {
         title: Joi.string().min(5).max(255).required(),
-        genreId: Joi.string().required(), // Why genreId bcz client will only genreId to us, he will not provide whole genre man. 
+        genreId: Joi.objectId().required(), // Why genreId bcz client will only genreId to us, he will not provide whole genre man. 
         numberInStock: Joi.number().min(0).required(),
         dailyRentalRate: Joi.number().min(0).required(),
     }
