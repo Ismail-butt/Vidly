@@ -20,7 +20,7 @@ router.get('/:id', async (req, res) => {
     res.send(genre)
 })
 
-router.post('/', async (req, res) => {
+router.post('/', protect, async (req, res) => {
     const {error} = validate(req.body)
     if(error) {
         // 400 - Bad Request
