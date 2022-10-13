@@ -1,3 +1,4 @@
+const { protect } = require("../middleware/authMiddleware")
 const { Genre, validate } = require('../models/genreModel')
 const express = require('express')
 const router = express.Router()
