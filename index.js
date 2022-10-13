@@ -2,11 +2,14 @@ const Joi = require('joi')
 Joi.objectId = require('joi-objectid')(Joi)
 const mongoose = require('mongoose')
 const express = require('express')
+const dotenv = require("dotenv").config()
+const { notFound, errorHandler } = require("./middleware/errorMiddleware")
 
 const genreRoutes = require('./routes/genreRoutes')
 const customerRoutes = require('./routes/customerRoutes')
 const movieRoutes = require('./routes/movieRoutes')
 const rentalRoutes = require('./routes/rentalRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 const app = express()
 
@@ -20,10 +23,14 @@ app.use('/api/genres', genreRoutes)
 app.use('/api/customers', customerRoutes)
 app.use('/api/movies', movieRoutes)
 app.use('/api/rentals', rentalRoutes);
+app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
     res.send('App is running...')
 })
+
+app.use(notFound)
+app.use(errorHandler)
 
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Listening at Port ${port}...`))
